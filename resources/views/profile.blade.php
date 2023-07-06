@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <script src="{{ asset('js/profile.js') }}"></script>
+    <script src="{{ asset('js/profile.js') }}" defer="true"></script>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
     <nav id="navbar">
        <div id="nomesito">Football.com</div>
        <div id="links">
-       <div class='link'><a href='home.php' class='bottone'> Home</a> </div>  
+       <div class='link'><a href='/home' class='bottone'> Home</a> </div>  
        </div>
     </nav>
     <div id="welcome-message">

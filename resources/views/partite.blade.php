@@ -10,8 +10,8 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Great+Vibes"> 
     <link rel="stylesheet" href="{{ asset('css/partite.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="{{ asset('js/partite.js') }}" defer="true"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <script src="{{ asset('js/partite.js') }}"></script>
 </head>
 
 <body>
@@ -28,7 +28,8 @@
         <div></div>
     </div>
     </nav>
-    <form method="POST" id='form1'>
+    <form id='form1'>
+        @csrf
         <label for="squadra1">
             <input type="text" id="squadra1" name="squadra1" placeholder='Team 1'> 
         </label>
@@ -45,3 +46,6 @@
 </section>
 </body>
 </html>
+<script>
+  const csrfToken = "{{ csrf_token() }}";
+</script>

@@ -49,7 +49,7 @@ function onpartitaJson(json) {
           cuore.classList.remove('far');
           cuore.classList.add('fas');
           cuore.classList.add('animating');
-          fetch(`http://localhost/aggiungilikepartite.php?id=${partita.idPartita}&squadra1=${partita.squadra1}&squadra2=${partita.squadra2}&casa=${partita.casa}&ospite=${partita.ospite}&competizione=${partita.competizione}&orario=${partita.orario}&stadio=${partita.stadio}&dataPartita=${partita.dataPartita}`)
+          fetch(`/aggiungilikepartite?id=${partita.idPartita}&squadra1=${partita.squadra1}&squadra2=${partita.squadra2}&casa=${partita.casa}&ospite=${partita.ospite}&competizione=${partita.competizione}&orario=${partita.orario}&stadio=${partita.stadio}&dataPartita=${partita.dataPartita}`)
             .then((response) => response.text())
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
@@ -57,7 +57,7 @@ function onpartitaJson(json) {
           cuore.classList.remove('fas');
           cuore.classList.add('far');
           cuore.classList.add('animating');
-          fetch(`http://localhost/rimuovilikepartite.php?id=${partita.idPartita}`)
+          fetch(`/rimuovilikepartite?id=${partita.idPartita}`)
             .then((response) => response.text())
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
@@ -105,7 +105,7 @@ function onStadiJson(json) {
           cuore.classList.remove('far');
           cuore.classList.add('fas');
           cuore.classList.add('animating');
-          fetch(`http://localhost/aggiungilikestadio.php?stadio=${stadio.stadio}&foto=${stadio.foto}`)
+          fetch(`/aggiungilikestadio?stadio=${stadio.stadio}&foto=${stadio.foto}`)
             .then((response) => response.text())
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
@@ -113,7 +113,7 @@ function onStadiJson(json) {
           cuore.classList.remove('fas');
           cuore.classList.add('far');
           cuore.classList.add('animating');
-          fetch(`http://localhost/rimuovilikestadio.php?stadio=${stadio.stadio}`)
+          fetch(`/rimuovilikestadio?stadio=${stadio.stadio}`)
             .then((response) => response.text())
             .then((data) => console.log(data))
             .catch((error) => console.log(error));
@@ -156,7 +156,7 @@ function onStadiJson(json) {
             cuore.classList.remove('far');
             cuore.classList.add('fas');
             cuore.classList.add('animating');
-            fetch(`http://localhost/aggiungilike.php?giocatore=${giocatore.giocatore}&foto=${giocatore.foto}`)
+            fetch(`/aggiungilike?giocatore=${giocatore.giocatore}&foto=${giocatore.foto}`)
               .then((response) => response.text())
               .then((data) => console.log(data))
               .catch((error) => console.log(error));
@@ -164,7 +164,7 @@ function onStadiJson(json) {
             cuore.classList.remove('fas');
             cuore.classList.add('far');
             cuore.classList.add('animating');
-            fetch(`http://localhost/rimuovilike.php?giocatore=${giocatore.giocatore}`)
+            fetch(`rimuovilike?giocatore=${giocatore.giocatore}`)
               .then((response) => response.text())
               .then((data) => console.log(data))
               .catch((error) => console.log(error));

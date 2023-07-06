@@ -10,14 +10,6 @@ class LoginController extends Controller
     {
         return view('login');
     }
-
-    // public function verifica() {
-    //     if(isset($_SESSION['username'])) {
-    //         return $_SESSION['username'];
-    //     }else 
-    //         return 0;
-    // }
-
     public function login(Request $request)
     {
         if ($request->session()->has('username')) {
