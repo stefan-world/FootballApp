@@ -102,14 +102,15 @@ class HomeController extends Controller
     {
         $username = $request->session()->get('username');
 
+
         if ($request->has('stadio') && $request->has('foto')) {
-            $stadio = $request->input('stadio');
+            $stadioName = $request->input('stadio');
             $foto = $request->input('foto');
 
             // Esegui la query di inserimento
             $stadio = new Stadi;
             $stadio->foto = $foto;
-            $stadio->stadio = $stadio;
+            $stadio->stadio = $stadioName;
             $stadio->username = $username;
             $stadio->save();
 
