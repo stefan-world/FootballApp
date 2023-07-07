@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Stadi;
+use App\Models\Giocatori;
 
 class HomeController extends Controller
 {
@@ -41,7 +42,7 @@ class HomeController extends Controller
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         $response = curl_exec($ch);
-        
+
         curl_close($ch);
         return $response;
     }
@@ -51,8 +52,7 @@ class HomeController extends Controller
 
         if ($request->has('stadio')) {
             $stadio = $request->input('stadio');
-            $exists = DB::table('stadi')
-                ->where('stadio', $stadio)
+            $exists = Stadi::where('stadio', $stadio)
                 ->where('username', $username)
                 ->exists();
 
@@ -67,17 +67,17 @@ class HomeController extends Controller
         if ($request->has('nome') && $request->has('cognome')) {
             $nome = $request->input('nome');
             $cognome = $request->input('cognome');
-    
+
             $url = "https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=" . urlencode($nome . " " . $cognome);
-    
+
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-    
+
             $response = curl_exec($ch);
             curl_close($ch);
-    
+
             return $response;
         }
     }
@@ -88,8 +88,7 @@ class HomeController extends Controller
         if ($request->has('giocatore')) {
             $giocatore = $request->input('giocatore');
 
-            $exists = DB::table('giocatori')
-                ->where('giocatore', $giocatore)
+            $exists = Giocatori::where('giocatore', $giocatore)
                 ->where('username', $username)
                 ->exists();
 
@@ -108,11 +107,11 @@ class HomeController extends Controller
             $foto = $request->input('foto');
 
             // Esegui la query di inserimento
-            DB::table('stadi')->insert([
-                'foto' => $foto,
-                'stadio' => $stadio,
-                'username' => $username
-            ]);
+            $stadio = new Stadi;
+            $stadio->foto = $foto;
+            $stadio->stadio = $stadio;
+            $stadio->username = $username;
+            $stadio->save();
 
             return response()->json(['message' => 'Dati inseriti con successo nel database.']);
         }
@@ -126,9 +125,8 @@ class HomeController extends Controller
             $stadio = $request->input('stadio');
 
             // Esegui la query di eliminazione
-            DB::table('stadi')
-                ->where('stadio', '=', $stadio)
-                ->where('username', '=', $username)
+            Stadi::where('stadio', $stadio)
+                ->where('username', $username)
                 ->delete();
 
             return response()->json(['message' => 'Riga rimossa con successo dal database.']);
@@ -144,11 +142,11 @@ class HomeController extends Controller
             $foto = $request->input('foto');
 
             // Esegui la query di inserimento
-            DB::table('giocatori')->insert([
-                'foto' => $foto,
-                'giocatore' => $giocatore,
-                'username' => $username
-            ]);
+            $giocatore = new Giocatori;
+            $giocatore->foto = $foto;
+            $giocatore->giocatore = $giocatore;
+            $giocatore->username = $username;
+            $giocatore->save();
 
             return response()->json(['message' => 'Dati inseriti con successo nel database.']);
         }
@@ -162,9 +160,8 @@ class HomeController extends Controller
             $giocatore = $request->input('giocatore');
 
             // Esegui la query di eliminazione
-            DB::table('giocatori')
-                ->where('giocatore', '=', $giocatore)
-                ->where('username', '=', $username)
+            Giocatori::where('giocatore', $giocatore)
+                ->where('username', $username)
                 ->delete();
 
             return response()->json(['message' => 'Riga rimossa con successo dal database.']);

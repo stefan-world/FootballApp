@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Partite;
 
 class PartiteController extends Controller
 {
@@ -27,7 +27,7 @@ class PartiteController extends Controller
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-    
+
         $response = curl_exec($ch);
         curl_close($ch);
 
@@ -36,14 +36,12 @@ class PartiteController extends Controller
 
     public function cercaLikePartita(Request $request)
     {
-        
+
         $idPartita = $request->query('id');
         $username = $request->session()->get('username');
 
-        $row = DB::table('partite')
-            ->where('idPartita', $idPartita)
+        $row = Partite::where('idPartita', $idPartita)
             ->where('username', $username)
-            ->get()
             ->first();
 
         return response()->json(['exists' => !is_null($row)]);
@@ -85,8 +83,7 @@ class PartiteController extends Controller
         $partitaId = $request->query('id');
         $username = $request->session()->get('username');
 
-        $affected = DB::table('partite')
-            ->where('idPartita', $partitaId)
+        $affected = Partite::where('idPartita', $partitaId)
             ->where('username', $username)
             ->delete();
 

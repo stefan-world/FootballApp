@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('partite', function (Blueprint $table) {
             $table->id();
             $table->string('username');
-            $table->string('IdPartita');
-            $table->string('Squadra1');
-            $table->string('Squadra2');
-            $table->string('Casa');
-            $table->string('Ospite');
-            $table->string('Competizione');
-            $table->string('Stadio');
-            $table->string('Orario');
-            $table->string('DataPartita');
+            $table->string('idpartita');
+            $table->string('squadra1');
+            $table->string('squadra2');
+            $table->string('casa');
+            $table->string('ospite');
+            $table->string('competizione');
+            $table->string('stadio');
+            $table->string('orario');
+            $table->string('datapartita');
             $table->timestamps();
         });
     }
